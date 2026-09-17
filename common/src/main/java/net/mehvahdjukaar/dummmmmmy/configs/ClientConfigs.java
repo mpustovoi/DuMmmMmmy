@@ -105,7 +105,7 @@ public class ClientConfigs {
 
         DAMAGE_TO_COLORS = builder.comment("Color to use for each damage type. Keys are damage type ids, or #tags, and are tested in insertion order")
                 .defineObject("damage_type_colors", () -> map,
-                        Codec.unboundedMap(IdOrTagPredicate.CODEC, ColorUtils.CODEC));
+                        Codec.unboundedMap(IdOrTagPredicate.CODEC, ColorUtils.RGB_CODEC));
 
         builder.pop();
 

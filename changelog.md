@@ -1,1 +1,1 @@
-- fixed an issue with particle light
+fixed an issue with number color

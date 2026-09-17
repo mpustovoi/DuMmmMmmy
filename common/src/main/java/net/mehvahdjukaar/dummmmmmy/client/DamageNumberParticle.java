@@ -54,7 +54,7 @@ public class DamageNumberParticle extends Particle {
         super(clientLevel, x, y, z);
         this.lifetime = 35;
         //this.setColor(FastColor.ARGB32.red(color), FastColor.ARGB32.green(color), FastColor.ARGB32.blue(color));
-        this.color = amount < 0 ? 0xff00ff00 : (int) dColor;
+        this.color = amount < 0 ? 0xff00ff00 : FastColor.ARGB32.opaque((int) dColor);
         this.darkColor = FastColor.ARGB32.color(255, (int) (this.rCol * 0.25f), (int) (this.rCol * 0.25f), (int) (this.rCol * 0.25));
 
         double number = Math.abs(ClientConfigs.SHOW_HEARTHS.get() ? amount / 2f : amount);
@@ -186,8 +186,8 @@ public class DamageNumberParticle extends Particle {
 
     // font forces full opacity when the top alpha bits are all off, so never go below 4
     private static int withAlpha(int color, float mult) {
-        int alpha = Mth.clamp((int) (((color >>> 24) & 0xff) * mult), 4, 255);
-        return (color & 0x00ffffff) | (alpha << 24);
+        int alpha = Mth.clamp((int) (FastColor.ARGB32.alpha(color) * mult), 4, 255);
+        return FastColor.ARGB32.color(alpha, color);
     }
 
     @Override
